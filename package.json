@@ -18,7 +18,9 @@
   "homepage": "https://github.com/Wicked7000/PixelBoard#readme",
   "dependencies": {
     "@octokit/rest": "^18.0.3",
+    "@types/axios": "^0.14.0",
     "aws4": "^1.10.1",
+    "axios": "^0.19.2",
     "mongodb": "^3.6.0",
     "mongodb-client-encryption": "^1.1.0",
     "react": "^16.13.1",
@@ -30,6 +32,7 @@
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",
+    "@types/request": "^2.48.5",
     "filemanager-webpack-plugin": "^2.0.5",
     "ts-loader": "^8.0.2",
     "typescript": "^3.9.7",
