@@ -1,5 +1,5 @@
 const path = require('path');
-const copyWebpackPlugin = require('copy-webpack-plugin');
+const FileManagerPlugin = require('filemanager-webpack-plugin');
 
 const loaders = () => {
     return {module: {
@@ -43,9 +43,18 @@ const clientConfig = {
     },
     ...loaders(),
     plugins: [
-        new copyWebpackPlugin({
-            patterns: [
-                { from: path.resolve(__dirname, 'dist', 'client.js'), to: path.resolve(__dirname, 'target', 'client.js') }
+        new FileManagerPlugin({
+            onEnd: [
+                {
+                    mkdir: [
+                        path.resolve(__dirname, 'target')
+                    ]
+                },
+                {
+                    copy: [
+                        { source: path.resolve(__dirname, 'dist', 'client.js'), destination: path.resolve(__dirname, 'target', 'client.js')},
+                    ]
+                }
             ]
         })
     ]
