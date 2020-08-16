@@ -10,6 +10,7 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: '12'
+      - run: npm install
       - run: npm run build
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.1
