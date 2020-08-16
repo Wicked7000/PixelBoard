@@ -3,7 +3,46 @@
         <title>PixelBoard - Wicked7000</title>
         <style>
             .pixel:hover{
-                filter: brightness(0.5);
+                -webkit-filter: invert(100%);
+                filter: invert(100%);
+            }
+
+            #root{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            #pixelboard{
+                border: 1px solid black;
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            td a:after {
+                content: '';
+                display: block;
+                margin-top: 100%;
+            }
+
+            td {
+                position: relative;
+            }
+
+            td:after {
+                content: '';
+                display: block;
+                margin-top: 100%;
+            }
+
+            td .content {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;                
             }
 
             body {

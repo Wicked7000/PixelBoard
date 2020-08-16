@@ -20,11 +20,13 @@ export default class PixelBoard extends React.Component<Props, {}>{
         const rows: any = {};        
         const bodyText = "If you'd like to modify the colour of the pixel please change the three values after 'pixel|', otherwise submit!";
         
+        const cellWidth = 100/GRID_SIZE;
+
         for(const pixel of pixels){
             const colour = pixel.colour;
             const titleText = `pixel|0,0,0|${pixel.x}|${pixel.y}`;
-            const elem = <td key={`${pixel.x}::${pixel.y}`} style={{ backgroundColor: `rgb(${colour[0]},${colour[1]},${colour[2]})` }}>
-                <a style={{ display: 'block', width: '100%', height: '100%' }} target="_blank" rel="noopener noreferrer" href={`https://github.com/Wicked7000/PixelBoard/issues/new?title=${encodeURIComponent(titleText)}&body=${encodeURIComponent(bodyText)}`}/>
+            const elem = <td className={`pixel`} key={`${pixel.x}::${pixel.y}`} style={{ width: `${cellWidth}%`, backgroundColor: `rgb(${colour[0]},${colour[1]},${colour[2]})` }}>
+                <a style={{ position: 'absolute', display: 'block', width: '100%', height: '100%' }} target="_blank" rel="noopener noreferrer" href={`https://github.com/Wicked7000/PixelBoard/issues/new?title=${encodeURIComponent(titleText)}&body=${encodeURIComponent(bodyText)}`}/>
             </td>
 
             if(rows[pixel.y]){
@@ -39,7 +41,7 @@ export default class PixelBoard extends React.Component<Props, {}>{
             const cells = rows[y]
             rowElems.push(<tr key={`tr-${y}`}>{cells}</tr>);
         }
-        return <table cellSpacing={0} cellPadding={0} style={{ width: '100%', height: '100%' }}>{rowElems}</table>;
+        return <table id="pixelboard" cellSpacing={0} cellPadding={0}><tbody>{rowElems}</tbody></table>;
     }
 
     render(){
