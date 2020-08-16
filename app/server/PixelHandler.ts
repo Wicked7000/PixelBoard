@@ -39,7 +39,7 @@ export default class PixelHandler{
             let batch = [];
             for(let x = 0; x < this.gridSize; x++){
                 for(let y = 0; y < this.gridSize; y++){
-                    const pixel = new Pixel(x, y, null, [255, 255, 255]);
+                    const pixel = new Pixel(x, y, null, [0, 0, 0]);
                     batch.push(pixel.getJSON());
                     if(batch.length === 1000){
                         await this.dbHandler.createMany('pixels', batch);
