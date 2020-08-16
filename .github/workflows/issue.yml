@@ -14,13 +14,8 @@ jobs:
         with:
           node-version: '12'
       - run: npm install
-      - name: Convert typescript to JS
-        run: npm run build-only
-      - run: echo %ISSUE_TITLE%
-        env:
-          ISSUE_TITLE: ${{ github.event.issue.title }}
       - name: Run user pixel command
-        run: node ./dist/server.js ${ISSUE_TITLE} ${GITHUB_USER}
+        run: npm run build
         env:
           GITHUB_USER: ${{ github.event.issue.user.login }}
           ISSUE_TITLE: ${{ github.event.issue.title }}

@@ -4,7 +4,6 @@
   "description": "Pixel board server side renderer",
   "main": "build/index.js",
   "scripts": {
-    "build-only": "webpack",
     "build": "webpack && node --max-old-space-size=2048 ./dist/server.js"
   },
   "repository": {
