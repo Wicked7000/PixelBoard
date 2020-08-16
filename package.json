@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Wicked7000/PixelBoard#readme",
   "dependencies": {
+    "@octokit/rest": "^18.0.3",
     "aws4": "^1.10.1",
     "mongodb": "^3.6.0",
     "mongodb-client-encryption": "^1.1.0",
