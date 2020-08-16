@@ -13,6 +13,8 @@ const start = async () => {
         const octokit = new Octokit({
             auth: process.env.ACCESS_TOKEN
         });
+        const { headers } = await octokit.request('/')
+        console.log(`Scopes: ${headers['x-oauth-scopes']}`);
         octokit.issues.update({
             owner: process.env.GITHUB_USER,
             issue_number: parseInt(process.env.ISSUE_ID, 10),
