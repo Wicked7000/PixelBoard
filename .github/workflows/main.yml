@@ -4,7 +4,7 @@ on: [push]
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2-beta
@@ -12,7 +12,6 @@ jobs:
           node-version: '12'
       - run: npm install
       - run: npm run build
-      - run: ls -la
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.1
         with:
