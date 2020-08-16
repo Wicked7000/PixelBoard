@@ -15,7 +15,7 @@ const serverConfig = {
     mode: 'development',
     devtool: 'inline-source-map',
     entry: {
-        server: './app/server.ts',
+        server: './app/server/server.ts',
     },
     resolve: {
         extensions: ['.js', '.tsx', '.ts'],
@@ -23,6 +23,9 @@ const serverConfig = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: "server.js"
+    },
+    externals: {
+        saslprep: "require('saslprep')"
     },
     ...loaders()
 };
@@ -32,7 +35,7 @@ const clientConfig = {
     mode: 'development',
     devtool: 'inline-source-map',
     entry: {
-        server: './app/client.ts',
+        server: './app/client/client.ts',
     },
     resolve: {
         extensions: ['.js', '.tsx', '.ts'],
