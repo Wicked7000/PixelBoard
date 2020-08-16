@@ -11,7 +11,7 @@ const start = async () => {
 
     if(process.env.GITHUB_USER && process.env.ISSUE_TITLE && process.env.ISSUE_ID && process.env.REPOSITORY_ID){
         const octokit = new Octokit({
-            auth: process.env.GITHUB_TOKEN
+            auth: process.env.ACCESS_TOKEN
         });
         octokit.issues.update({
             owner: process.env.GITHUB_USER,

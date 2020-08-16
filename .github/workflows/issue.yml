@@ -20,7 +20,7 @@ jobs:
           REPOSITORY_ID: ${{ github.event.repository.full_name }}
           ISSUE_ID: ${{ github.event.issue.id }}
           GITHUB_USER: ${{ github.event.issue.user.login }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           DB_PASS: ${{ secrets.DB_PASS }}
           DB_USER: ${{ secrets.DB_USER }}
