@@ -25,6 +25,19 @@ export default class DatabaseHandler{
         }        
     }
 
+    public async replace(collection: string, jsonFilter: Record<string, any>[], updateJson: Record<string, any>[]): Promise<boolean>{
+        await this.connect();
+        if(this.databaseObj){
+            const updated = await this.databaseObj.collection(collection).replaceOne(jsonFilter, updateJson);
+            if(updated.result.ok === 1){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
+
     public async createMany(collection: string, jsonRecords: Record<string, any>[]): Promise<Result<number>>{
         await this.connect();
         const dbObj = this.databaseObj;

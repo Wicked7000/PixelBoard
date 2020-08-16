@@ -8,6 +8,16 @@ import { GRID_SIZE } from '../shared/settings';
 const start = async () => {
     const dbHandler = new DatabaseHandler('pixels');
     const pixelHandler = new PixelHandler(dbHandler, GRID_SIZE);
+
+    if(process.argv.length > 2){
+        const userCommand = process.argv[2];
+        const githubUsername = process.argv[3];
+        const regex = /^pixel|\d+,\d+,\d+|\d+|\d+$/g;
+        if(regex.test(userCommand)){
+            pixelHandler.updatePixelFromUserCommand(userCommand, githubUsername);
+        }
+    }
+
     await pixelHandler.createInitialPixelData();
     const pixelData = await pixelHandler.createCombinedPixelJson();
 

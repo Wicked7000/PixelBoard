@@ -11,6 +11,24 @@ export default class PixelHandler{
         this.gridSize = gridSize;
     }
 
+    public async updatePixelFromUserCommand(userCommand: string, username: string){
+        const regex = /^pixel|(\d+,\d+,\d+)|(\d+)|(\d+)$/g;
+        const matchObj = userCommand.match(regex)
+        if(matchObj?.length === 4){
+            const [_, colours, x, y] = matchObj;
+            const xInt = parseInt(x, 10);
+            const yInt = parseInt(y, 10);
+            const coloursArray = colours.split(',').map(item => parseInt(item, 10)) as any;
+            const filterObj: Record<string, any>[] = { 'x': xInt, 'y': yInt } as any;
+            const res = await this.dbHandler.replace('pixels', filterObj, new Pixel(xInt, yInt, username, coloursArray).getJSON() as any);
+            if(res){
+                console.log("Successfully updated user pixel!");
+            }else{
+                console.log("Failed to update user pixel!");
+            }
+        }
+    } 
+
     public async createInitialPixelData(){        
         const pixelCount = await this.dbHandler.countInCollection('pixels');
         console.log(`Current amount of pixels: ${pixelCount}`);
