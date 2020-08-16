@@ -17,7 +17,7 @@ jobs:
       - name: Run user pixel command
         run: npm run build
         env:
-          REPOSITORY_ID: ${{ github.event.repository.id }}
+          REPOSITORY_ID: ${{ github.event.repository.full_name }}
           ISSUE_ID: ${{ github.event.issue.id }}
           GITHUB_USER: ${{ github.event.issue.user.login }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
