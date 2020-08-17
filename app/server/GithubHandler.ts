@@ -20,12 +20,19 @@ export default class GithubHandler{
     }
 
     public closeIssue(issue_id: number){
-        return axios.patch(`https://api.github.com/repos/${this.fullRepoName}/issues/${issue_id}`,
-        {
-            state: 'closed',
-        },{
-            ...this.getHeaders(),
-        }        
-    );
+        return new Promise((resolve) => {
+            axios.patch(`https://api.github.com/repos/${this.fullRepoName}/issues/${issue_id}`,
+            {
+                state: 'closed',
+            },{
+                ...this.getHeaders(),
+            }).catch((error) => {
+                console.log("Error closing github issue!");
+            }).then((data) => {
+                console.log("Github issue closed!");
+            }).finally(() => {
+                resolve();
+            });
+        });
     }
 }

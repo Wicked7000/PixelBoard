@@ -1,4 +1,4 @@
-import { MongoClient, Db } from 'mongodb';
+import { MongoClient, Db, BulkWriteReplaceOneOperation } from 'mongodb';
 
 type Result<T> = T | boolean;
 
@@ -25,7 +25,20 @@ export default class DatabaseHandler{
         }        
     }
 
-    public async replace(collection: string, jsonFilter: Record<string, any>[], updateJson: Record<string, any>[]): Promise<boolean>{
+    public async bulkReplace(collection: string, replaceCommnads: Array<BulkWriteReplaceOneOperation<any>>){
+        await this.connect();
+        if(this.databaseObj){
+            const response = await this.databaseObj.collection(collection).bulkWrite(replaceCommnads);
+            if(response.result && response.result.ok === 1){
+                return response.modifiedCount;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public async replace(collection: string, jsonFilter: Record<string, any>, updateJson: Record<string, any>): Promise<boolean>{
         await this.connect();
         if(this.databaseObj){
             const updated = await this.databaseObj.collection(collection).replaceOne(jsonFilter, updateJson);

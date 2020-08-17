@@ -1,6 +1,9 @@
 import DatabaseHandler from "./DatabaseHandler";
 import Pixel from "../shared/Pixel";
 import { isBoolean } from "util";
+import fs from 'fs';
+import { PNG } from 'pngjs';
+import { GRID_SIZE } from "../shared/settings";
 
 export default class PixelHandler{
     private dbHandler: DatabaseHandler;
@@ -10,6 +13,50 @@ export default class PixelHandler{
         this.dbHandler = dbHandler;
         this.gridSize = gridSize;
     }
+
+    public async updateBasedOnImage(filePath: string){
+        const databaseHandler = this.dbHandler;
+        await new Promise((resolve) => {
+            fs.createReadStream(filePath).pipe(new PNG({
+                filterType: 4,
+            })).on('parsed', async function () {
+                let replaceOperations = [];
+    
+                const sampleEveryY = Math.ceil(this.height / GRID_SIZE);
+                const sampleEveryX = Math.ceil(this.width / GRID_SIZE);
+    
+                console.log(sampleEveryX, sampleEveryY);
+                
+                for(let x = 0; x < GRID_SIZE; x++){
+                    for(let y = 0; y < GRID_SIZE; y++){
+                        const filterObj: Record<string, any> = {x: x, y: y};
+                        const dataIdx = (this.width * y + x) << 2;
+                        const colourData: any = [this.data[dataIdx], this.data[dataIdx+1], this.data[dataIdx+2]];
+
+                        console.log(x, y, colourData);
+                        replaceOperations.push({
+                            replaceOne: {
+                                filter: filterObj,
+                                replacement: new Pixel(x, y, 'system', colourData).getJSON(),
+                            }
+                        });
+                    }
+                }
+                console.log("Finished generating commands!");
+                const response = await databaseHandler.bulkReplace('pixels', replaceOperations);
+                if(!isBoolean(response)){
+                    console.log(`${response} pixels updated via image!`)
+                }
+                console.log("Finished updating via image!");
+                resolve();
+            }).on('error', function(error){
+                console.error(error);
+                resolve();
+            });
+        });        
+    }
+
+
 
     public async updatePixelFromUserCommand(userCommand: string, username: string){
         const regex = /^pixel|(\d+,\d+,\d+)|(\d+)|(\d+)$/g;
