@@ -15,8 +15,10 @@ This project is setup using the following components:
 
 ### TODO List
 ---
-- Users have a cooldown period
+- [ ] Users have a cooldown period
     - Each user can only submit a new pixel every 5 minutes or so
-- Leaderboard data on most pixels, longest 'kept' pixels and so on.
-- Colour picker that can be used to easily create the issue if the user has javascript enabled.
-- Nicer styling (Currently pixels might not be squares depending on the resolution of the monitor that you run on)
+- [ ] Leaderboard data on most pixels, longest 'kept' pixels and so on.
+- [ ] Colour picker that can be used to easily create the issue if the user has javascript enabled.
+    - Having better dynamic styling when javascript is enabled would be awesome too.
+- [x] Nicer styling (Currently pixels might not be squares depending on the resolution of the monitor that you run on)
+- [ ] Create the ability to initialise the grid via an image. (Can only be done locally not via CI/CD pipes)
