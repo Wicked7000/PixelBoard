@@ -31,7 +31,6 @@ const updatePixelsBasedOnImageIfPresent = async (pixelHandler: PixelHandler) => 
 }
 
 const start = async () => {
-    
     const dbHandler = new DatabaseHandler('pixels');
     const pixelHandler = new PixelHandler(dbHandler, GRID_SIZE);
     

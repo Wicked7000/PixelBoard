@@ -18,9 +18,11 @@
   "homepage": "https://github.com/Wicked7000/PixelBoard#readme",
   "dependencies": {
     "@octokit/rest": "^18.0.3",
+    "@tippyjs/react": "^4.1.0",
     "@types/axios": "^0.14.0",
     "aws4": "^1.10.1",
     "axios": "^0.19.2",
+    "d3": "^5.16.0",
     "mongodb": "^3.6.0",
     "mongodb-client-encryption": "^1.1.0",
     "pngjs": "^5.0.0",
@@ -29,6 +31,7 @@
     "saslprep": "^1.0.3"
   },
   "devDependencies": {
+    "@types/d3": "^5.7.2",
     "@types/mongodb": "^3.5.25",
     "@types/node": "^14.0.27",
     "@types/pngjs": "^3.4.2",

@@ -1,8 +1,19 @@
 import React from 'react';
-import { hydrate } from 'react-dom';
-import PixelBoard from './components/PixelBoard';
+import { render } from 'react-dom';
+import PixelBoardAdvanced from './components/PixelBoardAdvanced';
 
-hydrate(
-    React.createElement(PixelBoard, {pixels: window.pixels}),
-    document.getElementById('root')
+const newElem = document.createElement('div')
+newElem.id = 'rootAdvanced';
+newElem.setAttribute("style", "display:flex;align-items:center;justify-content:center;");
+document.body.appendChild(newElem);
+
+
+const oldElem = document.getElementById('root');
+if(oldElem){
+    document.body.removeChild(oldElem);
+}
+
+render(
+    React.createElement(PixelBoardAdvanced, {pixels: window.pixels}),
+    document.getElementById('rootAdvanced')
 )
