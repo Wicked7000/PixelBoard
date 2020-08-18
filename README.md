@@ -2,16 +2,17 @@
 ---
 This idea was heavily inspired by the reddit april fools from /r/place.
 
-This project is setup so that whenever an issue is correctly with a specific format you can change one of the pixels that is on the 'Pixel board'.
+This project is setup so that whenever an issue is created with a specific format you can change the colour of a pixel on the 'pixel board'.
 
 [VISIT PIXEL BOARD](https://pixelboard.netlify.app/)
 
 ### BACKGROUND
 ---
 This project is setup using the following components:
-- React Server side renderning
+- React Server side rendering
     - This allows for the pixel board to be rendered for the user even when they don't have JS enabled.
     - Different versions of the pixel board are rendered dependent on if JS is enabled or not (the JS version is much more performant)
+- No API Requests are used. All data about pixels are gathered from the DOM/JS Files that are generated via workflows.
 - Server that fetches data about pixels from mongoDB and deals with updating when an issue is received.
 
 ### TODO List
