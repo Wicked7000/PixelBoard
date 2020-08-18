@@ -1,7 +1,7 @@
 import { PixelJSON } from "../../shared/Pixel";
 import * as React from "react";
 import { GRID_SIZE } from "../../shared/settings";
-import { select, selectAll, rgb } from 'd3';
+import { select, selectAll, rgb, event } from 'd3';
 
 interface Props {
     pixels: PixelJSON[];
@@ -58,6 +58,12 @@ export default class PixelBoardAdvanced extends React.Component<Props, {}>{
                 return item as PixelJSOND3;
             }
         );
+        
+        const tooltip = select('body')
+            .append('div')
+            .attr('class', 'tooltip')
+            .style('opacity', '0');
+        
         const rects = select(this.node)
             .selectAll("rect")
             .data(pixelData)
@@ -74,16 +80,31 @@ export default class PixelBoardAdvanced extends React.Component<Props, {}>{
                 const darkerColour = rgb(d.colour[0], d.colour[1], d.colour[2]).darker(0.7);
                 select(this)
                     .style("fill", darkerColour.toString())
-                    .style("cursor", "pointer");                
+                    .style("cursor", "pointer"); 
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tooltip.html(`Last updated by: @${d.owner}`)
+                    .style("text-anchor", "middle")
+                    .style("left", function(){
+                        const width = select(this).node()?.getBoundingClientRect().width ?? 1;
+                        return event.pageX - (width/2);
+                    })
+                    .style("top", (event.pageY - 30) + "px");
              })
              .on("mouseout", function(d){
                 select(this)
                     .style("fill", `rgb(${d.colour.join(",")})`)
                     .style("cursor", "unset");
+                tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
              })
              .on("click", (d) => {
                 this.openGithubInNewTab(d.x, d.y);
              });
+        
+        
     }
 
     alterSVG(){
