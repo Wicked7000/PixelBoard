@@ -21,6 +21,7 @@ This project is setup using the following components:
 - [ ] Leaderboard data on most pixels, longest 'kept' pixels and so on. (Maybe have this update the readme?)
 - [ ] Colour picker that can be used to easily create the issue if the user has javascript enabled.
 - [ ] Have pipeline comment back on the issue if it failed / successfully updated the board?
+- [ ] Display a screenshot of the pixel board and its state every hour using cron based workflow?
 - [x] Having better dynamic styling when javascript is enabled would be awesome too.
 - [x] Nicer styling (Currently pixels might not be squares depending on the resolution of the monitor that you run on)
 - [x] Create the ability to initialise the grid via an image. (Can only be done locally not via CI/CD pipes)
